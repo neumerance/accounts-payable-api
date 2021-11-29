@@ -35,6 +35,7 @@ email String
 website String
 
 ### Invoice Line Items
+belongs_to Invoice
 String Item
 Description Text
 Quantity Number
