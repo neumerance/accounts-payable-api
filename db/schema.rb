@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_29_074213) do
+ActiveRecord::Schema.define(version: 2021_11_29_075350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,33 @@ ActiveRecord::Schema.define(version: 2021_11_29_074213) do
     t.integer "type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "invoice_line_items", force: :cascade do |t|
+    t.bigint "invoice_id"
+    t.string "item"
+    t.text "description"
+    t.integer "quantity"
+    t.decimal "price", precision: 8, scale: 2
+    t.decimal "amount", precision: 8, scale: 2
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["invoice_id"], name: "index_invoice_line_items_on_invoice_id"
+  end
+
+  create_table "invoices", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "business_id"
+    t.decimal "sub_total", precision: 10, scale: 2
+    t.decimal "discount", precision: 3, scale: 2
+    t.boolean "is_paid?", default: false
+    t.integer "status"
+    t.date "locked_at"
+    t.integer "locked_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["business_id"], name: "index_invoices_on_business_id"
+    t.index ["user_id"], name: "index_invoices_on_user_id"
   end
 
   create_table "items", force: :cascade do |t|
