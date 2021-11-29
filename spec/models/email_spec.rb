@@ -1,5 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe Email, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe Email, type: :model do
+  it do
+    should define_enum_for(:type)
+      .with_values(%i(business personal))
+  end
 end

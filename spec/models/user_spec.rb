@@ -1,5 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe User, type: :model do
+  it do
+    should define_enum_for(:role)
+      .with_values(%i(admin client accounts_payable_officer encoder))
+  end
 end
