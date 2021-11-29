@@ -27,6 +27,7 @@ description Text
 name String
 
 ### Business
+belongs_to Company
 name String
 address String
 phone String
