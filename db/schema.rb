@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_29_075350) do
+ActiveRecord::Schema.define(version: 2021_11_29_090041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,15 @@ ActiveRecord::Schema.define(version: 2021_11_29_075350) do
     t.index ["invoice_id"], name: "index_invoice_line_items_on_invoice_id"
   end
 
+  create_table "invoice_payable_reports", force: :cascade do |t|
+    t.string "name"
+    t.date "report_start_date"
+    t.date "report_date_end"
+    t.integer "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "invoices", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "business_id"
@@ -96,6 +105,20 @@ ActiveRecord::Schema.define(version: 2021_11_29_075350) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "payable_vendor_reports", force: :cascade do |t|
+    t.bigint "invoice_payable_report_id"
+    t.bigint "business_id"
+    t.boolean "is_paid?", default: false
+    t.decimal "payable_amount", precision: 10, scale: 2
+    t.datetime "paid_at"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["business_id"], name: "index_payable_vendor_reports_on_business_id"
+    t.index ["invoice_payable_report_id"], name: "index_payable_vendor_reports_on_invoice_payable_report_id"
+    t.index ["user_id"], name: "index_payable_vendor_reports_on_user_id"
+  end
+
   create_table "phones", force: :cascade do |t|
     t.string "number"
     t.integer "type"
@@ -109,6 +132,16 @@ ActiveRecord::Schema.define(version: 2021_11_29_075350) do
     t.integer "role"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "webhook_requests", force: :cascade do |t|
+    t.jsonb "body"
+    t.jsonb "headers"
+    t.string "webhook_requestable_type"
+    t.bigint "webhook_requestable_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["webhook_requestable_type", "webhook_requestable_id"], name: "webhook_index"
   end
 
   create_table "websites", force: :cascade do |t|
