@@ -13,6 +13,7 @@
 #  token                  :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  parent_user_id         :integer
 #
 # Indexes
 #
@@ -24,6 +25,6 @@ require 'rails_helper'
 describe User, type: :model do
   it do
     should define_enum_for(:role)
-      .with_values(%i(admin client accounts_payable_officer encoder))
+      .with_values(%i(admin client accounts_payable_officer encoder client_staff))
   end
 end

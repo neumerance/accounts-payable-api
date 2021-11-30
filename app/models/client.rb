@@ -13,6 +13,7 @@
 #  token                  :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  parent_user_id         :integer
 #
 # Indexes
 #
@@ -21,4 +22,6 @@
 #
 class Client < User
   default_scope { where(role: :client) }
+
+  has_many :client_staff, foreign_key: :parent_user_id
 end

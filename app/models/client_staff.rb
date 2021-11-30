@@ -20,6 +20,6 @@
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
-class User < ApplicationRecord
-  enum role: %i(admin client accounts_payable_officer encoder client_staff)
+class ClientStaff < User
+  default_scope { where(role: :client_staff) }
 end

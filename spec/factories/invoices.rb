@@ -4,6 +4,7 @@
 #
 #  id           :bigint           not null, primary key
 #  discount     :decimal(3, 2)
+#  image_url    :string
 #  is_paid?     :boolean          default(FALSE)
 #  locked_at    :date
 #  status       :integer
@@ -11,7 +12,9 @@
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  business_id  :bigint
+#  job_order_id :string
 #  locked_by_id :integer
+#  uploader_id  :integer
 #  user_id      :bigint
 #
 # Indexes

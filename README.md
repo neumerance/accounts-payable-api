@@ -1,24 +1,12 @@
-# README
+# Invoice Accounts Payable API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is an API platform for AP.
+This application is a event driven application using (Rails Event Sourcing)[https://railseventstore.org/]
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Setup
+```
+bundle install
+bundle exec rake db:create
+bundle exec rake db:migrate
+bundle exec rails s
+```

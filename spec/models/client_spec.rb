@@ -20,6 +20,10 @@
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
-class User < ApplicationRecord
-  enum role: %i(admin client accounts_payable_officer encoder client_staff)
+require 'rails_helper'
+
+describe Client, type: :model do
+  describe 'association' do
+    it { should have_many :client_staff }
+  end
 end

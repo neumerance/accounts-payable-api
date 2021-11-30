@@ -13,6 +13,7 @@
 #  token                  :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  parent_user_id         :integer
 #
 # Indexes
 #

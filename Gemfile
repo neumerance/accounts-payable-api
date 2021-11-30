@@ -27,6 +27,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'attr_extras'
 gem 'rails_event_store'
+gem 'dry-struct', '~> 1.0'
+gem 'dry-validation', '~> 1.5'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
