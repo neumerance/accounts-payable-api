@@ -15,10 +15,10 @@ Rails.configuration.to_prepare do
 
 
   Rails.configuration.event_store.tap do |store|
-    store.subscribe(Ap::Reactors::OnInvoiceJobCreated, to: [Ap::Events::InvoiceJobCreated])
+    store.subscribe(Ap::Reactors::OnInvoiceCreated, to: [Ap::Events::InvoiceCreated])
   end
 
   Rails.configuration.command_bus.tap do |bus|
-    bus.register(Ap::Commands::MakeInvoiceJob, Ap::Commands::OnMakeInvoiceJob.new)
+    bus.register(Ap::Commands::MakeInvoice, Ap::Commands::OnMakeInvoice.new)
   end
 end

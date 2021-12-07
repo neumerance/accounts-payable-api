@@ -20,10 +20,8 @@
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
-require 'rails_helper'
-
-describe Client, type: :model do
-  describe 'association' do
-    it { should have_many :client_staffs }
+FactoryBot.define do
+  factory :client_staff do
+    role { :client_staff }
   end
 end

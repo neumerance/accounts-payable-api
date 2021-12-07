@@ -6,11 +6,15 @@ module Ap
 
     attr_accessor :workflow_state
 
+    on Events::WorkflowStarted do |_event|
+      @workflow_state = :started
+    end
+
+    on Events::InvoiceCreated do |_event|
+    end
+
     def initialize(id)
       @id = id
-
-      # :not_started, :started, :ended
-      @workflow_state = :not_started
     end
 
     def make_invoice_job(params)
@@ -18,7 +22,7 @@ module Ap
 
       start_workflow(params)
 
-      apply Events::InvoiceJobCreated.new(params)
+      apply Events::InvoiceCreated.new(data: params)
     end
 
     private
@@ -26,7 +30,7 @@ module Ap
     def start_workflow(params)
       raise Errors::WorkflowEnded.new(params[:id]) if workflow_state == :ended
 
-      apply Events::WorkflowStarted.new
+      apply Events::WorkflowStarted.new(data: params)
     end
   end
 end

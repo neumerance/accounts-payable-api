@@ -22,4 +22,6 @@
 #
 class ClientStaff < User
   default_scope { where(role: :client_staff) }
+
+  belongs_to :client, foreign_key: :parent_user_id
 end

@@ -21,5 +21,5 @@
 class PayableVendorReport < ApplicationRecord
   has_one :webhook_request, as: :webhook_requestable # payment sent webhook request
   belongs_to :invoice_payable_report
-  belongs_to :accounts_payable_officer, foreign_key: :user_id, optional: true
+  belongs_to :accounts_payable_officer, foreign_key: :user_id, required: true
 end

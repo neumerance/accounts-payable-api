@@ -23,5 +23,5 @@
 class Client < User
   default_scope { where(role: :client) }
 
-  has_many :client_staff, foreign_key: :parent_user_id
+  has_many :client_staffs, foreign_key: :parent_user_id
 end

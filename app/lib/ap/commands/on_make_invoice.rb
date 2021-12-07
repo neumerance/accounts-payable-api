@@ -1,6 +1,6 @@
 module Ap
   module Commands
-    class OnMakeInvoiceJob
+    class OnMakeInvoice
       include Commands::CommandHandler
 
       def call(command)
