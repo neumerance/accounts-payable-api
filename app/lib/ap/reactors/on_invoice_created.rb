@@ -6,7 +6,7 @@ module Ap
       def call(event)
         @data = event.data
 
-        Invoice.create(
+        Invoice.create!(
           job_order_id: data[:id],
           image_urls: data[:image_urls],
           client: client,

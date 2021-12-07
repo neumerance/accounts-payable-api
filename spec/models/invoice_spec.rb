@@ -15,6 +15,7 @@
 #  business_id    :bigint
 #  job_order_id   :string
 #  locked_by_id   :integer
+#  sorter_id      :integer
 #  uploader_id    :integer
 #  user_id        :bigint
 #
@@ -26,6 +27,8 @@
 require 'rails_helper'
 
 describe Invoice, type: :model do
+  subject(:invoice) { create(:invoice) }
+
   it do
     should define_enum_for(:status)
       .with_values(%i(created sorted rejected encoding encoded verifying verified approved))
@@ -33,6 +36,9 @@ describe Invoice, type: :model do
 
   describe 'associations' do
     it { should belong_to :client }
+    it { should belong_to(:uploader) }
+    it { should belong_to(:sorter).optional }
+    it { should belong_to(:locked_by).optional }
     it { should have_many :invoice_line_items }
   end
 end

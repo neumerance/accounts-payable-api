@@ -13,16 +13,23 @@ module Ap
     on Events::InvoiceCreated do |_event|
     end
 
+    on Events::InvoiceSorted do |_event|
+    end
+
     def initialize(id)
       @id = id
     end
 
-    def make_invoice_job(params)
+    def make_invoice(params)
       raise Errors::WorkflowAlreadyStarted.new(params[:id]) if workflow_state == :started
 
       start_workflow(params)
 
       apply Events::InvoiceCreated.new(data: params)
+    end
+
+    def sort_invoice(params)
+      apply Events::InvoiceSorted.new(data: params)
     end
 
     private

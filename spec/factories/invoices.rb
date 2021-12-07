@@ -15,6 +15,7 @@
 #  business_id    :bigint
 #  job_order_id   :string
 #  locked_by_id   :integer
+#  sorter_id      :integer
 #  uploader_id    :integer
 #  user_id        :bigint
 #
@@ -25,6 +26,11 @@
 #
 FactoryBot.define do
   factory :invoice do
-    
+    client { build(:client) }
+    sorter { build(:encoder) }
+
+    after(:build) do |invoice|
+      invoice.uploader = build(:client_staff, client: invoice.client)
+    end
   end
 end

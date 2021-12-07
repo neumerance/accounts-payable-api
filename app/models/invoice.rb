@@ -15,6 +15,7 @@
 #  business_id    :bigint
 #  job_order_id   :string
 #  locked_by_id   :integer
+#  sorter_id      :integer
 #  uploader_id    :integer
 #  user_id        :bigint
 #
@@ -28,6 +29,8 @@ class Invoice < ApplicationRecord
 
   belongs_to :client, foreign_key: :user_id
   belongs_to :uploader, foreign_key: :uploader_id, class_name: 'ClientStaff'
+  belongs_to :sorter, foreign_key: :sorter_id, class_name: 'Encoder', optional: true
+  belongs_to :locked_by, foreign_key: :locked_by_id, class_name: 'Encoder', optional: true
   has_many :invoice_line_items
   has_many :comments, as: :commentable
 end

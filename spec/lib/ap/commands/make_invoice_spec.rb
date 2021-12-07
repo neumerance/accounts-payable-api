@@ -11,7 +11,7 @@ describe Ap::Commands::MakeInvoice  do
     end
   end
   let(:uploader) { client.client_staffs.last }
-  let(:job_order_id) { UniqueIdGenerator.generateUUID(client.id, uploader.id) }
+  let(:job_order_id) { UniqueIdGenerator.generateUUID(client.id) }
   let(:make_invoice_job_params) do
     {
       id: job_order_id,
@@ -29,6 +29,7 @@ describe Ap::Commands::MakeInvoice  do
     expect { command }.to publish(an_event(Ap::Events::InvoiceCreated)).in(event_store)
 
     invoice = Invoice.find_by(job_order_id: job_order_id)
+
     expect(invoice.uploader).to eq uploader
     expect(invoice.client).to eq client
     expect(invoice.image_urls).to containing_exactly(

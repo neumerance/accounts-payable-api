@@ -1,11 +1,11 @@
 module Ap
   module Commands
-    class OnMakeInvoice
+    class OnSortInvoice
       include Commands::CommandHandler
 
       def call(command)
         with_aggregate(Transaction, command.aggregate_id) do |transaction|
-          transaction.make_invoice(command.as_json.symbolize_keys)
+          transaction.sort_invoice(command.as_json.symbolize_keys)
         end
       end
     end

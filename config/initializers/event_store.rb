@@ -16,9 +16,11 @@ Rails.configuration.to_prepare do
 
   Rails.configuration.event_store.tap do |store|
     store.subscribe(Ap::Reactors::OnInvoiceCreated, to: [Ap::Events::InvoiceCreated])
+    store.subscribe(Ap::Reactors::OnInvoiceSorted, to: [Ap::Events::InvoiceSorted])
   end
 
   Rails.configuration.command_bus.tap do |bus|
     bus.register(Ap::Commands::MakeInvoice, Ap::Commands::OnMakeInvoice.new)
+    bus.register(Ap::Commands::SortInvoice, Ap::Commands::OnSortInvoice.new)
   end
 end
