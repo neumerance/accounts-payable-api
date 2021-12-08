@@ -33,4 +33,5 @@ class Invoice < ApplicationRecord
   belongs_to :locked_by, foreign_key: :locked_by_id, class_name: 'Encoder', optional: true
   has_many :invoice_line_items
   has_many :comments, as: :commentable
+  has_many :invoice_images
 end

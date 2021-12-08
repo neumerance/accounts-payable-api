@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_07_165334) do
+ActiveRecord::Schema.define(version: 2021_12_08_054357) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,21 @@ ActiveRecord::Schema.define(version: 2021_12_07_165334) do
     t.index ["created_at"], name: "index_event_store_events_in_streams_on_created_at"
     t.index ["stream", "event_id"], name: "index_event_store_events_in_streams_on_stream_and_event_id", unique: true
     t.index ["stream", "position"], name: "index_event_store_events_in_streams_on_stream_and_position", unique: true
+  end
+
+  create_table "invoice_images", force: :cascade do |t|
+    t.string "image_url"
+    t.integer "uploader_id"
+    t.integer "client_id"
+    t.integer "sorter_id"
+    t.integer "status", default: 0, null: false
+    t.bigint "invoice_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_id"], name: "index_invoice_images_on_client_id"
+    t.index ["invoice_id"], name: "index_invoice_images_on_invoice_id"
+    t.index ["sorter_id"], name: "index_invoice_images_on_sorter_id"
+    t.index ["uploader_id"], name: "index_invoice_images_on_uploader_id"
   end
 
   create_table "invoice_line_items", force: :cascade do |t|
